@@ -1,0 +1,54 @@
+[
+    {
+        "path": "university",
+        "modificationDate": "2019-01-01",
+        "type": "folder",
+        "name": "university",
+        "content": [
+            {
+                "path": "university/faculties",
+                "modificationDate": "2018-10-21",
+                "name": "faculties",
+                "type": "folder",
+                "content": [
+                    {
+                        "path": "university/faculties/mathematics",
+                        "modificationDate": "2018-10-23",
+                        "name": "mathematics",
+                        "type": "folder",
+                        "content": [
+                            
+                        ]
+                    },
+                    {
+                        "path": "university/faculties/chemistry",
+                        "modificationDate": "2018-10-21",
+                        "name": "chemistry",
+                        "type": "folder",
+                        "content": [
+                            
+                        ]
+                    },
+                    {
+                        "path": "university/faculties/physics",
+                        "modificationDate": "2018-10-24",
+                        "name": "chemistry",
+                        "type": "folder",
+                        "content": [
+                            
+                        ]
+                    },
+                    {
+                        "path": "university/faculties/biology",
+                        "modificationDate": "2018-10-25",
+                        "name": "chemistry",
+                        "type": "folder",
+                        "content": [
+                            
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
