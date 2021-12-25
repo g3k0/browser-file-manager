@@ -32,7 +32,7 @@
                     {
                         "path": "university/faculties/physics",
                         "modificationDate": "2018-10-24",
-                        "name": "chemistry",
+                        "name": "physics",
                         "type": "folder",
                         "content": [
                             
@@ -41,7 +41,7 @@
                     {
                         "path": "university/faculties/biology",
                         "modificationDate": "2018-10-25",
-                        "name": "chemistry",
+                        "name": "biology",
                         "type": "folder",
                         "content": [
                             
