@@ -10,9 +10,9 @@ interface folder {
     modificationDate: string;
     name: string;
     type: string;
-    content: folder[] | file[];
+    content: (folder|file)[];
 }
 
 export interface ContentTree {
-    contentTree: folder[] | file[];
+    contentTree: (folder|file)[];
 }
