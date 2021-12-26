@@ -2,7 +2,6 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
-import { ContentTree } from '../models/ContentTree';
 
 @Component({
   selector: 'content-component',
@@ -24,9 +23,9 @@ export class ContentComponent implements OnInit {
     console.log('----------------------------');
     console.log(this.router.url);
     console.log('-----------------------------');
+    console.log(this.utilsService.getContent().contentTree);
   }
 
   private href: string = '';
-  public content: ContentTree = this.utilsService.getContentTree();
 
 }

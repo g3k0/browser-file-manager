@@ -20,11 +20,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'browser-file-manager'`, () => {
+ /*  it(`should have as title 'browser-file-manager'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('browser-file-manager');
-  });
+  }); */
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);

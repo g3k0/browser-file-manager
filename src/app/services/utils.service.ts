@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as contentTree from '../../assets/content-tree.json';
+import * as contentJSON from '../../assets/content-tree.json';
 import { ContentTree } from '../models/ContentTree';
 
 @Injectable({
@@ -9,7 +9,19 @@ export class UtilsService {
 
   constructor() { }
 
-  getContentTree(): ContentTree {
-    return contentTree;
+  private content: ContentTree = {
+    contentTree: []
+  };
+
+  public setContent(c: ContentTree): void {
+    this.content = c;
+  }
+
+  public getContent(): ContentTree {
+    return this.content;
+  }
+
+  static getContentJSON(): ContentTree {
+    return contentJSON;
   }
 }

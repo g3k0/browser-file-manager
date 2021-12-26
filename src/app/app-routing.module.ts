@@ -1,39 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContentTree } from '../app/models/ContentTree';
 import { UtilsService } from './services/utils.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContentComponent } from './content/content.component';
- 
+
+const content = UtilsService.getContentJSON();
+
+
 const routes: Routes = [
   { path: '', component: ContentComponent },
-  //{ path: this.content.contentTree[0].path, component: ContentComponent },
+  { path: content.contentTree[0].path, component: ContentComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [UtilsService],
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
 
   constructor(
-    private utilsService: UtilsService,
+    utilsService: UtilsService, 
   ) {
-    this.defineRoutes();
+    utilsService.setContent(content);
   }
-
-  content: ContentTree = this.utilsService.getContentTree();
-
-
-  defineRoutes = () => {
-    routes.push(
-      { path: '', component: ContentComponent },
-      { path: this.content.contentTree[0].path, component: ContentComponent },
-      { path: '', component: ContentComponent },
-      { path: '**', component: NotFoundComponent },
-
-    )
-  }
-
 }
