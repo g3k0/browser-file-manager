@@ -1,8 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContentService } from '../../services/content.service';
-import { ContentTree } from '../../../models/ContentTree';
+import { UtilsService } from '../services/utils.service';
+import { ContentTree } from '../models/ContentTree';
 
 @Component({
   selector: 'content-component',
@@ -12,7 +12,7 @@ import { ContentTree } from '../../../models/ContentTree';
 export class ContentComponent implements OnInit {
   
   constructor(
-    private contentService: ContentService,
+    private utilsService: UtilsService,
     private router : Router,
   ) {
 
@@ -27,6 +27,6 @@ export class ContentComponent implements OnInit {
   }
 
   private href: string = '';
-  public content: ContentTree = this.contentService.getContentTree();
+  public content: ContentTree = this.utilsService.getContentTree();
 
 }
