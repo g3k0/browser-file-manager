@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Content, ContentTree } from '../models/ContentTree';
 import { UtilsService } from '../services/utils.service';
 
 @Component({
@@ -18,14 +19,36 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.href = this.router.url;
 
-    console.log('----------------------------');
-    console.log(this.router.url);
-    console.log('-----------------------------');
-    console.log(this.utilsService.getContent().contentTree);
+
+    this.href = this.router.url.substring(1);
+
+    this.contentTree = this.utilsService.getContent();
+
+    this.folder =  this.getCurrentFolder();
+
+    console.log(this.folder);
   }
 
   private href: string = '';
+  private contentTree: ContentTree = { contentTree: [] }
+  public folder: Content[]  = [];
+
+  private getCurrentFolder(): Content[] {
+
+    const folder: Content[] = [];
+    const loopContent = (content: Content[]): void => {
+      for (let [key, value] of Object.entries(content)) {
+        if (value.path === this.href) {
+          folder.push(value);
+        } else if (value.content) {
+          loopContent(value.content);
+        }
+
+      }
+    }
+    loopContent(this.contentTree.contentTree);
+    return folder;
+  } 
 
 }
