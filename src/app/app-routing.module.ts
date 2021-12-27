@@ -23,7 +23,7 @@ const loopContent = (routes: string[],content: Content[]): string[] => {
       });
     }
   }
-  function onlyUnique(value: any, index: any, self: any) {
+  function onlyUnique(value: string, index: number, self: any): boolean {
     return self.indexOf(value) === index;
   }
   const uniqueRoutes = routes.filter(onlyUnique);
