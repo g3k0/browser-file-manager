@@ -19,20 +19,23 @@
                             "type": "folder",
                             "content": [
                                 {
-                                    "path": "university/faculties/mathematics/subjects_math.txt",
+                                    "path": "university/faculties/mathematics",
                                     "modificationDate": "2018-07-15",
+                                    "name": "subjects_math.txt",
                                     "type": "file",
                                     "size": 43269
                                 },
                                 {
-                                    "path": "university/faculties/mathematics/subjects.pdf",
+                                    "path": "university/faculties/mathematics",
                                     "modificationDate": "2017-11-03",
+                                    "name": "subjects.pdf",
                                     "type": "file",
                                     "size": 18173
                                 },
                                 {
-                                    "path": "university/faculties/mathematics/test.txt",
+                                    "path": "university/faculties/mathematics",
                                     "modificationDate": "2018-01-13",
+                                    "name": "test.txt",
                                     "type": "file",
                                     "size": 28738
                                 }
@@ -45,20 +48,23 @@
                             "type": "folder",
                             "content": [
                                 {
-                                    "path": "university/faculties/chemistry/exam.txt",
+                                    "path": "university/faculties/chemistry",
                                     "modificationDate": "2019-10-15",
+                                    "name": "exam.txt",
                                     "type": "file",
                                     "size": 74392
                                 },
                                 {
-                                    "path": "university/faculties/chemistry/subjects_2.pdf",
+                                    "path": "university/faculties/chemistry",
                                     "modificationDate": "2019-11-24",
+                                    "name": "subjects_2.txt",
                                     "type": "file",
                                     "size": 26396
                                 },
                                 {
-                                    "path": "university/faculties/chemistry/subjects.txt",
+                                    "path": "university/faculties/chemistry",
                                     "modificationDate": "2018-09-10",
+                                    "name": "subjects.txt",
                                     "type": "file",
                                     "size": 12846
                                 },
@@ -69,14 +75,16 @@
                                     "type": "folder",
                                     "content": [
                                         {
-                                            "path": "university/faculties/chemistry/courses/mathematics.txt",
+                                            "path": "university/faculties/chemistry/courses",
                                             "modificationDate": "2020-01-10",
+                                            "name": "mathematics.txt",
                                             "type": "file",
                                             "size": 13765
                                         },
                                         {
-                                            "path": "university/faculties/chemistry/courses/organic_chemistry.txt",
+                                            "path": "university/faculties/chemistry/courses",
                                             "modificationDate": "2020-01-11",
+                                            "name": "organic_chemistry.csv",
                                             "type": "file",
                                             "size": 18735
                                         }
@@ -91,20 +99,23 @@
                             "type": "folder",
                             "content": [
                                 {
-                                    "path": "university/faculties/physics/exam.txt",
+                                    "path": "university/faculties/physics",
                                     "modificationDate": "2018-03-11",
+                                    "name": "exam.txt",
                                     "type": "file",
                                     "size": 28946
                                 },
                                 {
-                                    "path": "university/faculties/physics/subjects.pdf",
+                                    "path": "university/faculties/physics",
                                     "modificationDate": "2018-10-24",
+                                    "name": "subjects.pdf",
                                     "type": "file",
                                     "size": 13648
                                 },
                                 {
-                                    "path": "university/faculties/physics/no_name.txt",
+                                    "path": "university/faculties/physics",
                                     "modificationDate": "2019-02-12",
+                                    "name": "no_name.txt",
                                     "type": "file",
                                     "size": 27344
                                 }
@@ -117,36 +128,41 @@
                             "type": "folder",
                             "content": [
                                 {
-                                    "path": "university/faculties/biology/exam.txt",
+                                    "path": "university/faculties/biology",
                                     "modificationDate": "2018-03-11",
+                                    "name": "exam.txt",
                                     "type": "file",
                                     "size": 28843
                                 },
                                 {
-                                    "path": "university/faculties/biology/subjects_3.pdf",
+                                    "path": "university/faculties/biology",
                                     "modificationDate": "2018-10-24",
+                                    "name": "subjects_3.pdf",
                                     "type": "file",
                                     "size": 17348
                                 },
                                 {
-                                    "path": "university/faculties/biology/test.txt",
+                                    "path": "university/faculties/biology",
                                     "modificationDate": "2019-04-20",
+                                    "name": "test.txt",
                                     "type": "file",
                                     "size": 13994
                                 }
                             ]
                         },
                         {
-                            "path": "university/faculties/subjects.txt",
+                            "path": "university/faculties",
                             "modificationDate": "2018-10-22",
+                            "name": "subjects.txt",
                             "type": "file",
                             "size": 59250
                         }
                     ]
                 },
                 {
-                    "path": "university/readme.txt",
+                    "path": "university",
                     "modificationDate": "2017-12-22",
+                    "name": "readme.txt",
                     "type": "file",
                     "size": 12349
                 }

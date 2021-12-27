@@ -10,6 +10,7 @@ const content = UtilsService.getContentJSON();
 const routes: Routes = [
   { path: '', component: ContentComponent },
   { path: content.contentTree[0].path, component: ContentComponent },
+  { path: content.contentTree[0].content![0].path, component: ContentComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
