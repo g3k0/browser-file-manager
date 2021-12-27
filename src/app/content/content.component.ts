@@ -19,15 +19,9 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.href = this.router.url.substring(1);
-
     this.contentTree = this.utilsService.getContent();
-
     this.folder =  this.getCurrentFolder();
-
-    console.log(this.folder);
   }
 
   private href: string = '';
