@@ -5,10 +5,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ContentComponent } from './content/content.component';
 import { Content } from './models/ContentTree';
 
-// Get the json of the directory structure
+/**
+ * Get the json of the directory structure
+ */
 const content = UtilsService.getContentJSON();
 
-// loop the json and extract the paths
+/**
+ * loop the json and extract the paths
+ */
 const a: string[] = []
 const loopContent = (routes: string[],content: Content[]): string[] => {
   for (let [key, value] of Object.entries(content)) {
@@ -36,14 +40,21 @@ const loopContent = (routes: string[],content: Content[]): string[] => {
 const paths = loopContent(a, content.contentTree);
 const routes: Routes = [];
 
-// define the routes based on the paths extracted
-if (content.contentTree[0].content && content.contentTree[0].content.length) {
+/**
+ * define the routes based on the paths extracted
+ */
+
+// case 1: the root content is empty
+if (!content.contentTree.length) {
+  routes.push({ path: '', component: ContentComponent });
+// case 2, there is content to show (only folders, only files or folders and files)
+} else {
   routes.push({ path: '',   redirectTo:  content.contentTree[0].path, pathMatch: 'full' });
+  paths.map((path: string) => {
+    routes.push({ path, component: ContentComponent });
+    return path;
+  });
 }
-paths.map((path: string) => {
-  routes.push({ path, component: ContentComponent });
-  return path;
-});
 routes.push({ path: '**', component: NotFoundComponent });
 
 
