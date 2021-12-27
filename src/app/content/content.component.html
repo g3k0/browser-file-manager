@@ -1,12 +1,22 @@
 <section id="file-manager">
 
   <div id="toolbar"> 
-    Toobar 
+    
   </div>
 
   <div id="main">
-    main content
-    <mat-icon class="done-icon">done</mat-icon>
+    <!-- <mat-icon class="done-icon">done</mat-icon> -->
+
+    <div *ngIf="folder.length">
+      <h3>Folder Name: {{ folder[0].name}}</h3>
+      <br />
+      <h3>Folder Content:</h3> 
+      <ul>
+        <li *ngFor="let item of folder[0].content; let currentElementIndex=index">
+          {{item.name}} - {{ item.type }}
+        </li>
+      </ul>
+    </div> 
   </div>
 
 </section>
