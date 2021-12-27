@@ -1,12 +1,12 @@
-export interface content {
+export interface Content {
     path: string;
     modificationDate: string;
     name: string;
     type: string;
     size?: number;
-    content?: content[];
+    content?: Content[];
 }
 
 export interface ContentTree {
-    contentTree: content[];
+    contentTree: Content[];
 }

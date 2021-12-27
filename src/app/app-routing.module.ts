@@ -3,16 +3,48 @@ import { RouterModule, Routes } from '@angular/router';
 import { UtilsService } from './services/utils.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContentComponent } from './content/content.component';
+import { Content } from './models/ContentTree';
 
 const content = UtilsService.getContentJSON();
 
+const a: string[] = []
+const loopContent = (routes: string[],content: Content[]): string[] => {
+  for (let [key, value] of Object.entries(content)) {
+    if (key === 'default') continue;
+    routes.push(value.path);
+    if (value.content && value.content.length) {
+      value.content.map((c: Content) => {
+        if (c.content && c.content.length) {
+          routes.push(c.path);
+          loopContent(routes,c.content);
+          return c;
+        }
+        return c;
+      });
+    }
+  }
+  function onlyUnique(value: any, index: any, self: any) {
+    return self.indexOf(value) === index;
+  }
+  const uniqueRoutes = routes.filter(onlyUnique);
 
-const routes: Routes = [
-  { path: '',   redirectTo:  content.contentTree[0].path, pathMatch: 'full' },
-  { path: content.contentTree[0].path, component: ContentComponent },
-  { path: content.contentTree[0].content![0].path, component: ContentComponent },
-  { path: '**', component: NotFoundComponent },
-];
+  return uniqueRoutes;
+}
+
+const paths = loopContent(a, content.contentTree);
+const routes: Routes = [];
+
+
+if (content.contentTree[0].content && content.contentTree[0].content.length) {
+  routes.push({ path: '',   redirectTo:  content.contentTree[0].path, pathMatch: 'full' });
+}
+paths.map((path: string) => {
+  routes.push({ path, component: ContentComponent });
+  return path;
+});
+routes.push({ path: '**', component: NotFoundComponent });
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
