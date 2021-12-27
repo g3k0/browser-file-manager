@@ -1,18 +1,12 @@
-interface file {
-    path: string;
-    modificationDate: string;
-    type: string;
-    size: number;
-}
-
-interface folder {
+export interface Content {
     path: string;
     modificationDate: string;
     name: string;
     type: string;
-    content: (folder|file)[];
+    size?: number;
+    content?: Content[];
 }
 
 export interface ContentTree {
-    contentTree: (folder|file)[];
+    contentTree: Content[];
 }
