@@ -5,8 +5,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ContentComponent } from './content/content.component';
 import { Content } from './models/ContentTree';
 
+// Get the json of the directory structure
 const content = UtilsService.getContentJSON();
 
+// loop the json and extract the paths
 const a: string[] = []
 const loopContent = (routes: string[],content: Content[]): string[] => {
   for (let [key, value] of Object.entries(content)) {
@@ -34,7 +36,7 @@ const loopContent = (routes: string[],content: Content[]): string[] => {
 const paths = loopContent(a, content.contentTree);
 const routes: Routes = [];
 
-
+// define the routes based on the paths extracted
 if (content.contentTree[0].content && content.contentTree[0].content.length) {
   routes.push({ path: '',   redirectTo:  content.contentTree[0].path, pathMatch: 'full' });
 }
