@@ -27,6 +27,7 @@ export class ContentComponent implements OnInit {
   private href: string = '';
   private contentTree: ContentTree = { contentTree: [] }
   public folder: Content[]  = [];
+  public columnsToDisplay = ['Name', 'Date modified', 'Type', 'Size'];
 
   private getCurrentFolder(): Content[] {
 

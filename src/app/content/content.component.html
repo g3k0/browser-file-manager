@@ -8,14 +8,43 @@
     <!-- <mat-icon class="done-icon">done</mat-icon> -->
 
     <div *ngIf="folder.length">
-      <h3>Folder Name: {{ folder[0].name}}</h3>
+      <!-- <h3>Folder Name: {{ folder[0].name}}</h3>
       <br />
       <h3>Folder Content:</h3> 
       <ul>
         <li *ngFor="let item of folder[0].content; let currentElementIndex=index">
           {{item.name}} - {{ item.type }}
         </li>
-      </ul>
+      </ul> -->
+
+      <mat-table *ngIf="folder[0].content" class="lessons-table mat-elevation-z8" [dataSource]="folder[0].content">
+  
+        <ng-container matColumnDef="Name">
+            <div *matHeaderCellDef>Name</div>
+            <div *matCellDef="let element">{{element.name}}</div>
+        </ng-container>
+      
+        <ng-container matColumnDef="Date modified">
+            <div *matHeaderCellDef>Date modified</div>
+            <div *matCellDef="let element">{{element.modificationDate}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="Type">
+          <div *matHeaderCellDef>Type</div>
+          <div *matCellDef="let element">{{element.type}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="Size">
+          <div *matHeaderCellDef>Size</div>
+          <div *matCellDef="let element">{{element.size? element.size + ' B' : ''}}</div>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        
+        <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+        
+    </mat-table>
+
     </div> 
   </div>
 
