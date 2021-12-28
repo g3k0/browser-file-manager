@@ -8,14 +8,45 @@
     <!-- <mat-icon class="done-icon">done</mat-icon> -->
 
     <div *ngIf="folder.length">
-      <h3>Folder Name: {{ folder[0].name}}</h3>
-      <br />
-      <h3>Folder Content:</h3> 
-      <ul>
-        <li *ngFor="let item of folder[0].content; let currentElementIndex=index">
-          {{item.name}} - {{ item.type }}
-        </li>
-      </ul>
+
+      <table mat-table  *ngIf="folder[0].content" [dataSource]="folder[0].content">
+  
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td  mat-cell *matCellDef="let element" (dblclick)="doubleClick(element)">
+              <mat-icon *ngIf="element.type==='folder'" class="folder-icon">folder</mat-icon>
+              <mat-icon *ngIf="element.type==='file'" class="file-icon">insert_drive_file</mat-icon>
+              {{element.name}}
+            </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="date-modified">
+            <th mat-header-cell *matHeaderCellDef>Date modified</th>
+            <td  mat-cell *matCellDef="let element">
+              {{element.modificationDate}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td  mat-cell *matCellDef="let element">
+            {{element.type}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="size">
+          <th mat-header-cell *matHeaderCellDef>Size</th>
+          <td  mat-cell *matCellDef="let element">
+            {{element.size? element.size + ' B' : ''}}
+          </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        
+    </table>
+
     </div> 
   </div>
 

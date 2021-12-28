@@ -27,10 +27,17 @@ export class ContentComponent implements OnInit {
   private href: string = '';
   private contentTree: ContentTree = { contentTree: [] }
   public folder: Content[]  = [];
+  public columnsToDisplay = ['name', 'date-modified', 'type', 'size'];
 
   private getCurrentFolder(): Content[] {
 
-    const folder: Content[] = [];
+    let folder: Content[] = [];
+
+    if (!this.href) {
+      return this.contentTree.contentTree;
+    }
+
+    
     const loopContent = (content: Content[]): void => {
       for (let [key, value] of Object.entries(content)) {
         if (value.path === this.href) {
@@ -42,7 +49,15 @@ export class ContentComponent implements OnInit {
       }
     }
     loopContent(this.contentTree.contentTree);
+
     return folder;
   } 
+
+  doubleClick(element: Content): void {
+    if (element.type === 'folder') {
+      this.router.navigateByUrl(element.path);
+    }
+    return;
+  }
 
 }

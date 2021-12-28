@@ -1,4 +1,31 @@
-.done-icon {
-   color: red;
-   font-size: 32px; 
+table {
+   width: 100%;
+
+   .mat-row:nth-child(even){
+      background-color: rgba(255, 255, 255, 1);
+  }
+          
+  .mat-row:nth-child(odd){
+      background-color: rgba(250, 250, 250, 1);
+  }
+
+  .mat-row {
+     cursor: pointer;
+     &:hover {
+      background-color: rgb(238, 239, 255);
+      transition: background-color 0.5s;
+     }
+  }
+
+  .folder-icon {
+      color: rgba(254, 214, 102, 1); 
+   }
+
+   .file-icon {
+      color: rgb(204, 204, 204); 
+   }
+
+   .folder-icon, .file-icon {
+      vertical-align: bottom;
+   }
 }
