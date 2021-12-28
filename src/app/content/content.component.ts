@@ -53,4 +53,11 @@ export class ContentComponent implements OnInit {
     return folder;
   } 
 
+  doubleClick(element: Content): void {
+    if (element.type === 'folder') {
+      this.router.navigateByUrl(element.path);
+    }
+    return;
+  }
+
 }

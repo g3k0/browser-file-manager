@@ -13,7 +13,7 @@
   
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td  mat-cell *matCellDef="let element">
+            <td  mat-cell *matCellDef="let element" (dblclick)="doubleClick(element)">
               <mat-icon *ngIf="element.type==='folder'" class="folder-icon">folder</mat-icon>
               <mat-icon *ngIf="element.type==='file'" class="file-icon">insert_drive_file</mat-icon>
               {{element.name}}

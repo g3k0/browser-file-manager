@@ -13,6 +13,7 @@ table {
      cursor: pointer;
      &:hover {
       background-color: rgb(238, 239, 255);
+      transition: background-color 0.5s;
      }
   }
 
