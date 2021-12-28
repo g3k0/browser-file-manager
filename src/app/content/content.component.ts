@@ -30,7 +30,13 @@ export class ContentComponent implements OnInit {
 
   private getCurrentFolder(): Content[] {
 
-    const folder: Content[] = [];
+    let folder: Content[] = [];
+
+    if (!this.href) {
+      return this.contentTree.contentTree;
+    }
+
+    
     const loopContent = (content: Content[]): void => {
       for (let [key, value] of Object.entries(content)) {
         if (value.path === this.href) {
@@ -42,6 +48,7 @@ export class ContentComponent implements OnInit {
       }
     }
     loopContent(this.contentTree.contentTree);
+
     return folder;
   } 
 

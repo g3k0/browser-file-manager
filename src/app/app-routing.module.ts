@@ -49,7 +49,7 @@ if (!content.contentTree.length) {
   routes.push({ path: '', component: ContentComponent });
 // case 2, there is content to show (only folders, only files or folders and files)
 } else {
-  routes.push({ path: '',   redirectTo:  content.contentTree[0].path, pathMatch: 'full' });
+  routes.push({ path: '', component: ContentComponent });
   paths.map((path: string) => {
     routes.push({ path, component: ContentComponent });
     return path;
