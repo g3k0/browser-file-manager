@@ -53,6 +53,28 @@
                                 "type": "folder",
                                 "content": [
                                     {
+                                        "path": "university/faculties/chemistry/courses",
+                                        "modificationDate": "2018-10-21",
+                                        "name": "courses",
+                                        "type": "folder",
+                                        "content": [
+                                            {
+                                                "path": "university/faculties/chemistry/courses",
+                                                "modificationDate": "2020-01-10",
+                                                "name": "mathematics.txt",
+                                                "type": "file",
+                                                "size": 13765
+                                            },
+                                            {
+                                                "path": "university/faculties/chemistry/courses",
+                                                "modificationDate": "2020-01-11",
+                                                "name": "organic_chemistry.csv",
+                                                "type": "file",
+                                                "size": 18735
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "path": "university/faculties/chemistry",
                                         "modificationDate": "2019-10-15",
                                         "name": "exam.txt",
@@ -72,28 +94,6 @@
                                         "name": "subjects.txt",
                                         "type": "file",
                                         "size": 12846
-                                    },
-                                    {
-                                        "path": "university/faculties/chemistry/courses",
-                                        "modificationDate": "2018-10-21",
-                                        "name": "chemistry",
-                                        "type": "folder",
-                                        "content": [
-                                            {
-                                                "path": "university/faculties/chemistry/courses",
-                                                "modificationDate": "2020-01-10",
-                                                "name": "mathematics.txt",
-                                                "type": "file",
-                                                "size": 13765
-                                            },
-                                            {
-                                                "path": "university/faculties/chemistry/courses",
-                                                "modificationDate": "2020-01-11",
-                                                "name": "organic_chemistry.csv",
-                                                "type": "file",
-                                                "size": 18735
-                                            }
-                                        ]
                                     }
                                 ]
                             },
