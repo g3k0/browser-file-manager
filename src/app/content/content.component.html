@@ -6,9 +6,9 @@
 
   <div id="main">
 
-    <div *ngIf="folder.length">
+    <div *ngIf="sortedData.length">
 
-      <table mat-table matSort *ngIf="folder[0].content" [dataSource]="sortedData" matSort (matSortChange)="sortData($event)">
+      <table mat-table matSort [dataSource]="sortedData" matSort (matSortChange)="sortData($event)">
   
         <ng-container matColumnDef="name">
             <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>Name</th>
