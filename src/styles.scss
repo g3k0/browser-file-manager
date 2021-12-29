@@ -40,3 +40,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: white !important;
 }
+
+.mat-form-field-underline {
+  display: none !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 !important;
+  padding-left: 16px !important;
+  border-radius: 20px !important;
+}
