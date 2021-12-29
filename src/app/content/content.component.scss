@@ -1,17 +1,17 @@
-.folder-icon {
-   color: rgba(254, 214, 102, 1); 
-}
+$padding: 1rem;
 
-.file-icon {
-   color: rgb(204, 204, 204); 
-} 
+.folder-icon {
+   color: rgba(254, 214, 102, 1);
+   vertical-align: middle; 
+}
 
 #toolbar {
    width: 100%;
    .path-bar, .search-bar {
+      background-color: rgba(240, 240, 240, 1);
       float: left; 
       height: 60px;
-      padding: 1rem;
+      padding: $padding;
    }
 
    .path-bar {
@@ -22,7 +22,7 @@
 
    }
    .search-bar {
-      width: 25%;
+      width: calc(30% - $padding*4);
    }
 
    .folder-icon {
