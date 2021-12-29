@@ -31,7 +31,7 @@ export class ContentComponent implements OnInit {
 
   private href: string = '';
   private contentTree: ContentTree = { contentTree: [] }
-  private folder: Content[]  = [];
+  public folder: Content[]  = [];
   public columnsToDisplay = ['name', 'date-modified', 'type', 'size'];
   public sortedData: Content[] = [];
 
