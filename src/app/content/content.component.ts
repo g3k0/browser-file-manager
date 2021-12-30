@@ -30,11 +30,12 @@ export class ContentComponent implements OnInit {
   }
 
   private href: string = '';
-  private contentTree: ContentTree = { contentTree: [] }
+  private contentTree: ContentTree = { contentTree: [] };
+  private backContent: Content[] = [];
   public folder: Content[]  = [];
   public columnsToDisplay = ['name', 'date-modified', 'type', 'size'];
   public sortedData: Content[] = [];
-  private backContent: Content[] = [];
+  public searchString: string = '';
 
   private getCurrentFolder(): Content[] {
 
@@ -44,7 +45,6 @@ export class ContentComponent implements OnInit {
       return this.contentTree.contentTree;
     }
 
-    
     const loopContent = (content: Content[]): void => {
       for (let [key, value] of Object.entries(content)) {
         if (value.path === this.href) {
@@ -60,18 +60,47 @@ export class ContentComponent implements OnInit {
     return folder;
   } 
 
-  doubleClick(element: Content): void {
+  private compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  private loopForBack = (a: Content, b:Content[]) => {
+
+    if (a.content) {
+      a.content.map((sc:Content) => {
+        if (sc.path === b[0].path) {
+          if (!a.path) return; // this is the root directory, can't go back
+          this.backContent = [a];
+          return; 
+        } else {
+          this.loopForBack(sc,b);
+        }
+        return sc;
+      })
+    }
+  };
+
+  private loopForSearch = (stringToSearch: string, content:Content[], resultsContentArray: Content[]) => {
+    content.map((c:Content) => {
+      if (c.name.includes(stringToSearch)) {
+        resultsContentArray.push(c);
+      }
+      if (c.content) {
+        this.loopForSearch(stringToSearch, c.content, resultsContentArray);
+      }
+    });
+    return resultsContentArray;
+  }
+
+  public doubleClick(element: Content): void {
+
     if (element.type === 'folder') {
       this.router.navigateByUrl(element.path);
     }
     return;
   }
 
-  private compare(a: number | string, b: number | string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
-
-  sortData(sort: Sort): void {
+  public sortData(sort: Sort): void {
 
     if (this.folder[0].content) {
       const data = this.folder[0].content.slice();
@@ -96,20 +125,6 @@ export class ContentComponent implements OnInit {
     }
   }
 
-  private loopForContent = (a: Content, b:Content[]) => {
-    if (a.content) {
-      a.content.map((sc:Content) => {
-        if (sc.path === b[0].path) {
-          this.backContent = [a];
-          return; 
-        } else {
-          this.loopForContent(sc,b);
-        }
-        return sc;
-      })
-    }
-  };
-
   /**
    * I loop into the main content tree structure searching for the parent content,
    * navigate to the previous route is more simple but in this case the back button doesn't work 
@@ -117,15 +132,38 @@ export class ContentComponent implements OnInit {
    * 
    */
   public goBack(content: Content[]): void {
-    this.loopForContent(this.contentTree.contentTree[0], content);
+    this.loopForBack(this.contentTree.contentTree[0], content);
     this.folder = this.backContent;
+    this.router.navigateByUrl(this.backContent[0].path);
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
     }
   }
 
   public search() {
-    console.log('search');
+    const searchResult: ContentTree = {
+      contentTree: [{
+        path: "",
+        modificationDate: "",
+        type: "folder",
+        name: "",
+        content: [],
+      }] 
+    };
+
+    const resultsArray = this.loopForSearch(this.searchString, this.contentTree.contentTree, []);
+    searchResult.contentTree[0].content = resultsArray;
+    this.folder = searchResult.contentTree;
+    if (this.folder[0].content) {
+      this.sortedData = this.folder[0].content.slice();
+    }
+  }
+
+  public clearSearch() {
+    this.folder = this.contentTree.contentTree;
+    if (this.folder[0].content) {
+      this.sortedData = this.folder[0].content.slice();
+    }
   }
 
 }
