@@ -7,6 +7,7 @@
       <mat-form-field class="path-bar-field" appearance="fill">
           <input matInput type="text" [(ngModel)]="folder[0].path" [readonly]="true">
       </mat-form-field>
+      <mat-icon matTooltip="Go back" class="previous-icon" (click)="goBack(folder)">skip_previous</mat-icon>
     </div>
 
     <div class="search-bar">

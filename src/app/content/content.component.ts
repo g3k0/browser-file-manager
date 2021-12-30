@@ -95,4 +95,8 @@ export class ContentComponent implements OnInit {
     }
   }
 
+  public goBack(content: Content[]): void {
+    console.log(content);
+  }
+
 }

@@ -1,8 +1,19 @@
 $padding: 1rem;
+$margin: 1rem;
+
+.folder-icon, .previous-icon {
+   vertical-align: middle; 
+}
 
 .folder-icon {
    color: rgba(254, 214, 102, 1);
-   vertical-align: middle; 
+}
+
+.previous-icon {
+   cursor: pointer;
+   transform: scale(1.5);
+   margin-left: $margin;
+   color: rgb(3, 131, 190);
 }
 
 #toolbar {
