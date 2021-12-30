@@ -155,7 +155,13 @@ export class ContentComponent implements OnInit {
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
     }
+  }
 
+  public clearSearch() {
+    this.folder = this.contentTree.contentTree;
+    if (this.folder[0].content) {
+      this.sortedData = this.folder[0].content.slice();
+    }
   }
 
 }

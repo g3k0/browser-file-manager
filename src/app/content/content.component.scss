@@ -1,7 +1,7 @@
 $padding: 1rem;
 $margin: 1rem;
 
-.folder-icon, .previous-icon, .search-icon {
+.folder-icon, .previous-icon, .search-icon, .clear-icon {
    vertical-align: middle; 
 }
 
@@ -9,7 +9,7 @@ $margin: 1rem;
    color: rgba(254, 214, 102, 1);
 }
 
-.previous-icon, .search-icon {
+.previous-icon, .search-icon, .clear-icon {
    cursor: pointer;
    transform: scale(1.5);
    margin-left: $margin;
