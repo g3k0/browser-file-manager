@@ -44,7 +44,6 @@ export class ContentComponent implements OnInit {
       return this.contentTree.contentTree;
     }
 
-    
     const loopContent = (content: Content[]): void => {
       for (let [key, value] of Object.entries(content)) {
         if (value.path === this.href) {
@@ -60,18 +59,34 @@ export class ContentComponent implements OnInit {
     return folder;
   } 
 
-  doubleClick(element: Content): void {
+  private compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  private loopForContent = (a: Content, b:Content[]) => {
+
+    if (a.content) {
+      a.content.map((sc:Content) => {
+        if (sc.path === b[0].path) {
+          if (!a.path) return; // this is the root directory, can't go back
+          this.backContent = [a];
+          return; 
+        } else {
+          this.loopForContent(sc,b);
+        }
+        return sc;
+      })
+    }
+  };
+
+  public doubleClick(element: Content): void {
     if (element.type === 'folder') {
       this.router.navigateByUrl(element.path);
     }
     return;
   }
 
-  private compare(a: number | string, b: number | string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
-
-  sortData(sort: Sort): void {
+  public sortData(sort: Sort): void {
 
     if (this.folder[0].content) {
       const data = this.folder[0].content.slice();
@@ -95,20 +110,6 @@ export class ContentComponent implements OnInit {
       });
     }
   }
-
-  private loopForContent = (a: Content, b:Content[]) => {
-    if (a.content) {
-      a.content.map((sc:Content) => {
-        if (sc.path === b[0].path) {
-          this.backContent = [a];
-          return; 
-        } else {
-          this.loopForContent(sc,b);
-        }
-        return sc;
-      })
-    }
-  };
 
   /**
    * I loop into the main content tree structure searching for the parent content,
