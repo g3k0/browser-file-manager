@@ -99,4 +99,8 @@ export class ContentComponent implements OnInit {
     console.log(content);
   }
 
+  public search() {
+    console.log('search');
+  }
+
 }

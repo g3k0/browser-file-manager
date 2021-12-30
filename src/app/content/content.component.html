@@ -11,7 +11,10 @@
     </div>
 
     <div class="search-bar">
-      Search bar
+      <mat-form-field class="search-bar-field" appearance="fill">
+        <input matInput type="text" placeholder="search...">
+      </mat-form-field>
+      <mat-icon matTooltip="Search" class="search-icon" (click)="search()">search</mat-icon>
     </div>
     
   </div>
