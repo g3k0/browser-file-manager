@@ -93,6 +93,7 @@ export class ContentComponent implements OnInit {
   }
 
   public doubleClick(element: Content): void {
+
     if (element.type === 'folder') {
       this.router.navigateByUrl(element.path);
     }
@@ -133,6 +134,7 @@ export class ContentComponent implements OnInit {
   public goBack(content: Content[]): void {
     this.loopForBack(this.contentTree.contentTree[0], content);
     this.folder = this.backContent;
+    this.router.navigateByUrl(this.backContent[0].path);
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
     }
