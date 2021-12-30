@@ -34,6 +34,7 @@ export class ContentComponent implements OnInit {
   public folder: Content[]  = [];
   public columnsToDisplay = ['name', 'date-modified', 'type', 'size'];
   public sortedData: Content[] = [];
+  private backContent: Content[] = [];
 
   private getCurrentFolder(): Content[] {
 
@@ -95,8 +96,32 @@ export class ContentComponent implements OnInit {
     }
   }
 
+  private loopForContent = (a: Content, b:Content[]) => {
+    if (a.content) {
+      a.content.map((sc:Content) => {
+        if (sc.path === b[0].path) {
+          this.backContent = [a];
+          return; 
+        } else {
+          this.loopForContent(sc,b);
+        }
+        return sc;
+      })
+    }
+  };
+
+  /**
+   * I loop into the main content tree structure searching for the parent content,
+   * navigate to the previous route is more simple but in this case the back button doesn't work 
+   * if the user press the "go back" button after making a search.
+   * 
+   */
   public goBack(content: Content[]): void {
-    console.log(content);
+    this.loopForContent(this.contentTree.contentTree[0], content);
+    this.folder = this.backContent;
+    if (this.folder[0].content) {
+      this.sortedData = this.folder[0].content.slice();
+    }
   }
 
   public search() {
