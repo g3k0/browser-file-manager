@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { HostListener, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Content, ContentTree } from '../models/ContentTree';
@@ -160,6 +160,7 @@ export class ContentComponent implements OnInit {
   }
 
   public clearSearch() {
+    this.searchString = '';
     this.folder = this.contentTree.contentTree;
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
