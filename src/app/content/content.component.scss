@@ -1,28 +1,69 @@
-table {
+$padding: 1rem;
+$margin: 1rem;
+
+.folder-icon, .previous-icon, .search-icon {
+   vertical-align: middle; 
+}
+
+.folder-icon {
+   color: rgba(254, 214, 102, 1);
+}
+
+.previous-icon, .search-icon {
+   cursor: pointer;
+   transform: scale(1.5);
+   margin-left: $margin;
+   color: rgba(22, 111, 229, 1);
+}
+
+#toolbar {
    width: 100%;
-
-   .mat-row:nth-child(even){
-      background-color: rgba(255, 255, 255, 1);
-  }
-          
-  .mat-row:nth-child(odd){
-      background-color: rgba(250, 250, 250, 1);
-  }
-
-  .mat-row {
-     cursor: pointer;
-     &:hover {
-      background-color: rgb(238, 239, 255);
-      transition: background-color 0.5s;
-     }
-  }
-
-  .folder-icon {
-      color: rgba(254, 214, 102, 1); 
+   border-bottom: 1px solid black;
+   .path-bar, .search-bar {
+      background-color: rgba(240, 240, 240, 1);
+      float: left; 
+      height: 60px;
+      padding: $padding;
    }
 
-   .file-icon {
-      color: rgb(204, 204, 204); 
+   .path-bar {
+      width: 70%;
+      .path-bar-field {
+         width: 80%;
+      }
+
+   }
+   .search-bar {
+      width: calc(30% - $padding*4);
+      .search-bar-field {
+         width: 80%;
+      }
+   }
+
+   .folder-icon {
+      margin-right: 0.5rem;
+   }
+}
+
+#main {
+   table {
+      width: 100%;
+
+      .mat-row:nth-child(even){
+         background-color: rgba(255, 255, 255, 1);
+      }
+            
+      .mat-row:nth-child(odd){
+            background-color: rgba(250, 250, 250, 1);
+      }
+
+      .mat-row {
+         cursor: pointer;
+         &:hover {
+            background-color: rgb(238, 239, 255);
+            transition: background-color 0.5s;
+         }
+      }
    }
 
    .folder-icon, .file-icon {
