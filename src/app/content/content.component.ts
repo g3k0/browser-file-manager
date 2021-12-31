@@ -4,22 +4,25 @@ import { Router } from '@angular/router';
 import { Content, ContentTree } from '../models/ContentTree';
 import { UtilsService } from '../services/utils.service';
 import {Sort} from '@angular/material/sort';
+import { AbstractKeypress } from './abstract-keypress';
+import { KeyboardNavigationService } from '../services/keyboard-navigation.service';
 
 @Component({
   selector: 'content-component',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent extends AbstractKeypress implements OnInit {
   
   constructor(
     private utilsService: UtilsService,
     private router : Router,
+    private keyService: KeyboardNavigationService,
   ) {
-
+    super(keyService);
   }
 
-  ngOnInit() {
+  override ngOnInit() {
     this.href = this.router.url.substring(1);
     this.contentTree = this.utilsService.getContent();
     this.folder =  this.getCurrentFolder();
@@ -165,6 +168,15 @@ export class ContentComponent implements OnInit {
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
     }
+  }
+
+  public keyActions: {[key: string]: () => void} = {
+    'KeyA': () => { console.log('reacting to A'); },
+  };
+
+  @HostListener('document:keypress', ['$event'])
+  public reactToKeyPress(key: any): void {
+    if (this.keyActions[key.code]) this.keyActions[key.code]();
   }
 
 }
