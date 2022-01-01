@@ -171,12 +171,31 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
   }
 
   public keyActions: {[key: string]: () => void} = {
-    'KeyA': () => { console.log('reacting to A'); },
+    'KeyB': () => { this.goBackKeyboardNavigation() },
+    'KeyW': () => { this.goUpKeyboardNavigation() },
+    'KeyS': () => { this.goDownKeyboardNavigation() },
+    'Enter': () => { this.executeActionKeyboardNavigation(); },
   };
 
   @HostListener('document:keypress', ['$event'])
   public reactToKeyPress(key: any): void {
     if (this.keyActions[key.code]) this.keyActions[key.code]();
+  }
+
+  private goBackKeyboardNavigation() {
+    console.log('go back action');
+  }
+
+  private executeActionKeyboardNavigation() {
+    console.log('execute action');
+  }
+
+  private goUpKeyboardNavigation() {
+    console.log('go up action');
+  }
+
+  private goDownKeyboardNavigation() {
+    console.log('go down action');
   }
 
 }
