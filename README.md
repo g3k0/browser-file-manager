@@ -12,7 +12,7 @@ It is possible to add and remove content inside this file, respecting the struct
 ## Application features
 
 * navigation via mouse;
-* navigation via keyboard: (`w` to go up, `s` to go down, `enter` to move inside a folder, `b` to go back);
+* navigation via keyboard: (`shift+w` to go up, `shift+s` to go down, `enter` to move inside a folder, `shift+b` to move one level back);
 * display of current directory full path;
 * search of file and folders inside the full directories tree;
 
