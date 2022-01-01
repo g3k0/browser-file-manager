@@ -29,6 +29,8 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
 
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
+      this.sortedDataLength = this.sortedData.length;
+      this.sortedDataKeyboardIndex = 0;
     }
   }
 
@@ -39,6 +41,11 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
   public columnsToDisplay = ['name', 'date-modified', 'type', 'size'];
   public sortedData: Content[] = [];
   public searchString: string = '';
+
+  private keyDownContent: Content[] = [];
+  private keyUpContent: Content[] = [];
+  private sortedDataLength: number = 0;
+  private sortedDataKeyboardIndex: number = 0;
 
   private getCurrentFolder(): Content[] {
 
@@ -141,6 +148,8 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
       this.router.navigateByUrl(this.backContent[0].path);
       if (this.folder[0].content) {
         this.sortedData = this.folder[0].content.slice();
+        this.sortedDataLength = this.sortedData.length;
+        this.sortedDataKeyboardIndex = 0;
       }
     }
   }
@@ -161,6 +170,8 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
     this.folder = searchResult.contentTree;
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
+      this.sortedDataLength = this.sortedData.length;
+      this.sortedDataKeyboardIndex = 0;
     }
   }
 
@@ -169,6 +180,8 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
     this.folder = this.contentTree.contentTree;
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
+      this.sortedDataLength = this.sortedData.length;
+      this.sortedDataKeyboardIndex = 0;
     }
   }
 
@@ -189,15 +202,40 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
   }
 
   private executeActionKeyboardNavigation() {
-    console.log('execute action');
+    if (this.keyDownContent.length) {
+      this.doubleClick(this.keyDownContent[0]);
+    } else if (this.keyUpContent.length) {
+      this.doubleClick(this.keyUpContent[0]);
+    }
   }
 
   private goUpKeyboardNavigation() {
-    console.log('go up action');
+
+    this.keyDownContent = [];
+
+    if (this.sortedDataKeyboardIndex > 0) {
+      this.sortedDataKeyboardIndex--;
+      this.keyDownContent = [this.sortedData[this.sortedDataKeyboardIndex]];
+    } else {
+      this.sortedDataKeyboardIndex = 0;
+      this.keyDownContent = [this.sortedData[0]];
+    }
   }
 
   private goDownKeyboardNavigation() {
-    console.log('go down action');
+
+    this.keyUpContent = [];
+
+    if (!this.keyDownContent.length) {
+      this.keyDownContent = [this.sortedData[0]];
+      return;
+    } else if (this.sortedDataKeyboardIndex < this.sortedDataLength) {
+      this.sortedDataKeyboardIndex++;
+      this.keyDownContent = [this.sortedData[this.sortedDataKeyboardIndex]];
+    } else {
+      this.keyDownContent = [];
+      return;
+    }
   }
 
 }
