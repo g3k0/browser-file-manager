@@ -71,8 +71,7 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
 
     if (a.content) {
       a.content.map((sc:Content) => {
-        if (sc.path === b[0].path) {
-          if (!a.path) return; // this is the root directory, can't go back
+        if (sc.path === b[0].path && a.path.length) {
           this.backContent = [a];
           return; 
         } else {
@@ -137,9 +136,12 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
   public goBack(content: Content[]): void {
     this.loopForBack(this.contentTree.contentTree[0], content);
     this.folder = this.backContent;
-    this.router.navigateByUrl(this.backContent[0].path);
-    if (this.folder[0].content) {
-      this.sortedData = this.folder[0].content.slice();
+
+    if (this.backContent && this.backContent.length) {
+      this.router.navigateByUrl(this.backContent[0].path);
+      if (this.folder[0].content) {
+        this.sortedData = this.folder[0].content.slice();
+      }
     }
   }
 
@@ -183,7 +185,7 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
   }
 
   private goBackKeyboardNavigation() {
-    console.log('go back action');
+    this.goBack(this.folder);
   }
 
   private executeActionKeyboardNavigation() {
