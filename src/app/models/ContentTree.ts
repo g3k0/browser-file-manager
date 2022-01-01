@@ -5,6 +5,7 @@ export interface Content {
     type: string;
     size?: number;
     content?: Content[];
+    keyboardSelected?: boolean;
 }
 
 export interface ContentTree {

@@ -1,31 +1,36 @@
-import { OnInit } from '@angular/core';
+import { HostListener, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Content, ContentTree } from '../models/ContentTree';
 import { UtilsService } from '../services/utils.service';
 import {Sort} from '@angular/material/sort';
+import { AbstractKeypress } from './abstract-keypress';
+import { KeyboardNavigationService } from '../services/keyboard-navigation.service';
 
 @Component({
   selector: 'content-component',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent extends AbstractKeypress implements OnInit {
   
   constructor(
     private utilsService: UtilsService,
     private router : Router,
+    private keyService: KeyboardNavigationService,
   ) {
-
+    super(keyService);
   }
 
-  ngOnInit() {
+  override ngOnInit() {
     this.href = this.router.url.substring(1);
     this.contentTree = this.utilsService.getContent();
     this.folder =  this.getCurrentFolder();
 
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
+      this.sortedDataLength = this.sortedData.length;
+      this.sortedDataKeyboardIndex = 0;
     }
   }
 
@@ -36,6 +41,11 @@ export class ContentComponent implements OnInit {
   public columnsToDisplay = ['name', 'date-modified', 'type', 'size'];
   public sortedData: Content[] = [];
   public searchString: string = '';
+
+  private keyDownContent: Content[] = [];
+  private keyUpContent: Content[] = [];
+  private sortedDataLength: number = 0;
+  private sortedDataKeyboardIndex: number = 0;
 
   private getCurrentFolder(): Content[] {
 
@@ -68,8 +78,7 @@ export class ContentComponent implements OnInit {
 
     if (a.content) {
       a.content.map((sc:Content) => {
-        if (sc.path === b[0].path) {
-          if (!a.path) return; // this is the root directory, can't go back
+        if (sc.path === b[0].path && a.path.length) {
           this.backContent = [a];
           return; 
         } else {
@@ -134,9 +143,14 @@ export class ContentComponent implements OnInit {
   public goBack(content: Content[]): void {
     this.loopForBack(this.contentTree.contentTree[0], content);
     this.folder = this.backContent;
-    this.router.navigateByUrl(this.backContent[0].path);
-    if (this.folder[0].content) {
-      this.sortedData = this.folder[0].content.slice();
+
+    if (this.backContent && this.backContent.length) {
+      this.router.navigateByUrl(this.backContent[0].path);
+      if (this.folder[0].content) {
+        this.sortedData = this.folder[0].content.slice();
+        this.sortedDataLength = this.sortedData.length;
+        this.sortedDataKeyboardIndex = 0;
+      }
     }
   }
 
@@ -156,13 +170,75 @@ export class ContentComponent implements OnInit {
     this.folder = searchResult.contentTree;
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
+      this.sortedDataLength = this.sortedData.length;
+      this.sortedDataKeyboardIndex = 0;
     }
   }
 
   public clearSearch() {
+    this.searchString = '';
     this.folder = this.contentTree.contentTree;
     if (this.folder[0].content) {
       this.sortedData = this.folder[0].content.slice();
+      this.sortedDataLength = this.sortedData.length;
+      this.sortedDataKeyboardIndex = 0;
+    }
+  }
+
+  public keyActions: {[key: string]: () => void} = {
+    'KeyB': () => { this.goBackKeyboardNavigation() },
+    'KeyW': () => { this.goUpKeyboardNavigation() },
+    'KeyS': () => { this.goDownKeyboardNavigation() },
+    'Enter': () => { this.executeActionKeyboardNavigation(); },
+  };
+
+  @HostListener('document:keypress', ['$event'])
+  public reactToKeyPress(key: any): void {
+    if (this.keyActions[key.code]) this.keyActions[key.code]();
+  }
+
+  private goBackKeyboardNavigation() {
+    this.goBack(this.folder);
+  }
+
+  private executeActionKeyboardNavigation() {
+    if (this.keyDownContent.length) {
+      this.doubleClick(this.keyDownContent[0]);
+    } else if (this.keyUpContent.length) {
+      this.doubleClick(this.keyUpContent[0]);
+    }
+  }
+
+  private goUpKeyboardNavigation() {
+
+    this.keyDownContent = [];
+
+    if (this.sortedDataKeyboardIndex > 0) {
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = false;
+      this.sortedDataKeyboardIndex--;
+      this.keyDownContent = [this.sortedData[this.sortedDataKeyboardIndex]];
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = true;
+    } else {
+      this.sortedDataKeyboardIndex = 0;
+      this.keyDownContent = [this.sortedData[0]];
+      this.sortedData[this.sortedDataKeyboardIndex+1].keyboardSelected = false;
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = true;
+    }
+  }
+
+  private goDownKeyboardNavigation() {
+
+    this.keyUpContent = [];
+
+    if (!this.keyDownContent.length) {
+      this.keyDownContent = [this.sortedData[0]];
+      this.sortedData[0].keyboardSelected = true;
+      return;
+    } else if (this.sortedDataKeyboardIndex < this.sortedDataLength-1) {
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = false;
+      this.sortedDataKeyboardIndex++;
+      this.keyDownContent = [this.sortedData[this.sortedDataKeyboardIndex]];
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = true;
     }
   }
 

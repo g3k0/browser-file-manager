@@ -64,9 +64,14 @@ $margin: 1rem;
       .mat-row {
          cursor: pointer;
          &:hover {
-            background-color: rgb(238, 239, 255);
+            background-color: rgba(238, 239, 255, 1);
             transition: background-color 0.5s;
          }
+      }
+
+      .keyboard-selected {
+         background-color: rgba(238, 239, 255, 1);
+         transition: background-color 0.5s;
       }
    }
 
