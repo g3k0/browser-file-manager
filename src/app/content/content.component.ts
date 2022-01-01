@@ -214,11 +214,15 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
     this.keyDownContent = [];
 
     if (this.sortedDataKeyboardIndex > 0) {
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = false;
       this.sortedDataKeyboardIndex--;
       this.keyDownContent = [this.sortedData[this.sortedDataKeyboardIndex]];
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = true;
     } else {
       this.sortedDataKeyboardIndex = 0;
       this.keyDownContent = [this.sortedData[0]];
+      this.sortedData[this.sortedDataKeyboardIndex+1].keyboardSelected = false;
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = true;
     }
   }
 
@@ -228,13 +232,13 @@ export class ContentComponent extends AbstractKeypress implements OnInit {
 
     if (!this.keyDownContent.length) {
       this.keyDownContent = [this.sortedData[0]];
+      this.sortedData[0].keyboardSelected = true;
       return;
-    } else if (this.sortedDataKeyboardIndex < this.sortedDataLength) {
+    } else if (this.sortedDataKeyboardIndex < this.sortedDataLength-1) {
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = false;
       this.sortedDataKeyboardIndex++;
       this.keyDownContent = [this.sortedData[this.sortedDataKeyboardIndex]];
-    } else {
-      this.keyDownContent = [];
-      return;
+      this.sortedData[this.sortedDataKeyboardIndex].keyboardSelected = true;
     }
   }
 
